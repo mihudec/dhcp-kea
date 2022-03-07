@@ -1,1 +1,44 @@
 ---
+- name: Install Kea Packages
+  ansible.builtin.include_tasks:
+    file: install.yml
+    apply:
+      tags:
+        - install
+  tags:
+    - install 
+
+
+- name: Deploy Kea DHCPv4 Candidate Config
+  ansible.builtin.copy:
+    dest: "{{ kea_config_dir }}/{{ kea_dhcp4_config_file }}.candidate"
+    owner: "{{ kea_config_file_owner }}"
+    group: "{{ kea_config_file_group }}"
+    mode: "{{ kea_config_file_mode }}"
+    content: "{{ {'Dhcp4': kea_dhcp4 | default({})} | to_nice_json(indent=2) }}"
+  register: candidate_kea_dhcp4_result
+
+- name: Test Kea DHCPv4 Candidate Config
+  ansible.builtin.shell:
+    cmd: "kea-dhcp4 -t {{ kea_config_dir }}/{{ kea_dhcp4_config_file }}.candidate"
+  register: test_kea_dhcp4_config_result
+
+- name: Apply New Config
+  block:
+    - name: Assert DHCPv4 Candidate Config is Valid
+      assert:
+        that: test_kea_dhcp4_config_result.failed is false
+    
+    - name: Backup DHCPv4 Current Config
+      ansible.builtin.copy: 
+        remote_src: true
+        src: "{{ kea_config_dir }}/{{ kea_dhcp4_config_file }}"
+        dest: "{{ kea_config_dir }}/{{ kea_dhcp4_config_file }}.backup"
+
+    - name: Promote DHCPv4 Candidate Config
+      ansible.builtin.copy: 
+        remote_src: true
+        src: "{{ kea_config_dir }}/{{ kea_dhcp4_config_file }}.candidate"
+        dest: "{{ kea_config_dir }}/{{ kea_dhcp4_config_file }}"
+      notify: restart_kea_dhcp4
+

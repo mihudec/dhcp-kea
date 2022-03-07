@@ -1,0 +1,55 @@
+- name: Install APT Dependencies
+  ansible.builtin.apt:
+    name: "{{ item }}"
+    update_cache: true
+    cache_valid_time: 3600
+  loop:
+    - apt-transport-https
+    - ca-certificates
+    - gnupg
+
+- name: Add CloudSmith.io APT Key
+  ansible.builtin.apt_key:
+    url: https://dl.cloudsmith.io/public/isc/kea-2-0/gpg.8029D4AFA58CBB5E.key
+    state: present
+
+- name: Get CloudSmith Repo File
+  ansible.builtin.get_url:
+    url: "https://dl.cloudsmith.io/public/isc/kea-2-0/config.deb.txt?distro={{ distro }}&codename={{ codename }}&arch={{ arch }}"
+    dest: /tmp/isc-kea-2-0.list
+  vars:
+    distro: "{{ ansible_distribution | lower }}"
+    codename: "{{ ansible_distribution_release | lower }}"
+    version: "{{ ansible_distribution_version | lower }}"
+    arch: "{{ ansible_architecture | lower }}"
+
+- name: Setup  CloudSmith.io Repository
+  copy:
+    remote_src: true
+    src: /tmp/isc-kea-2-0.list
+    dest: /etc/apt/sources.list.d/isc-kea-2-0.list
+  register: kea_repo_result
+
+- name: Update APT Cache
+  ansible.builtin.apt:
+    update_cache: true
+  when:
+    - (kea_repo_result.changed)
+
+- name: Install Kea Packages
+  ansible.builtin.apt:
+    name: "{{ item.name }}"
+    state: "{{ item.state | default(omit) }}"
+    update_cache: true
+    cache_valid_time: 3600
+  loop: "{{ kea_packages }}"
+
+- name: Enable and start services
+  systemd:
+    name: "{{ item.name }}"
+    state: started
+    enabled: true
+  loop: "{{ kea_packages }}"
+  when: 
+    - (item.service is defined)
+    - (item.service is sameas true)

@@ -1,1 +1,17 @@
 ---
+kea_packages:
+  - name: isc-kea-dhcp4-server
+    state: latest
+    service: true
+  
+  - name: isc-kea-dhcp-ddns-server
+    state: latest
+    service: true
+  
+  - name: isc-kea-ctrl-agent
+    state: latest
+    service: true
+  
+  - name: kea-admin
+    state: absent
+    

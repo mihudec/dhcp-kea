@@ -1,1 +1,12 @@
 ---
+kea_config_dir: '/etc/kea'
+kea_config_dir_owner: root
+kea_config_dir_group: root
+kea_config_dir_mode: '0655'
+
+kea_config_file_owner: root
+kea_config_file_group: root
+kea_config_file_mode: '0644'
+
+kea_dhcp4_config_file: kea-dhcp4.conf
+kea_ddns_config_file: kea-dhcp-ddns.conf

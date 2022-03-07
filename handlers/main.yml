@@ -1,1 +1,5 @@
 ---
+- name: Restart Kea DHCPv4
+  shell: 
+    cmd: keactrl reload 
+  listen: restart_kea_dhcp4
