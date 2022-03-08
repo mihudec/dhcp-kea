@@ -1,0 +1,3 @@
+__pycache__/
+*.py[cod]
+filter_plugins/__pycache__/*

@@ -1,0 +1,406 @@
+[
+  {
+    "code": 2,
+    "name": "time-offset"
+  },
+  {
+    "code": 3,
+    "name": "routers"
+  },
+  {
+    "code": 4,
+    "name": "time-servers"
+  },
+  {
+    "code": 5,
+    "name": "name-servers"
+  },
+  {
+    "code": 6,
+    "name": "domain-name-servers"
+  },
+  {
+    "code": 7,
+    "name": "log-servers"
+  },
+  {
+    "code": 8,
+    "name": "cookie-servers"
+  },
+  {
+    "code": 9,
+    "name": "lpr-servers"
+  },
+  {
+    "code": 10,
+    "name": "impress-servers"
+  },
+  {
+    "code": 11,
+    "name": "resource-location-servers"
+  },
+  {
+    "code": 13,
+    "name": "boot-size"
+  },
+  {
+    "code": 14,
+    "name": "merit-dump"
+  },
+  {
+    "code": 15,
+    "name": "domain-name"
+  },
+  {
+    "code": 16,
+    "name": "swap-server"
+  },
+  {
+    "code": 17,
+    "name": "root-path"
+  },
+  {
+    "code": 18,
+    "name": "extensions-path"
+  },
+  {
+    "code": 19,
+    "name": "ip-forwarding"
+  },
+  {
+    "code": 20,
+    "name": "non-local-source-routing"
+  },
+  {
+    "code": 21,
+    "name": "policy-filter"
+  },
+  {
+    "code": 22,
+    "name": "max-dgram-reassembly"
+  },
+  {
+    "code": 23,
+    "name": "default-ip-ttl"
+  },
+  {
+    "code": 24,
+    "name": "path-mtu-aging-timeout"
+  },
+  {
+    "code": 25,
+    "name": "path-mtu-plateau-table"
+  },
+  {
+    "code": 26,
+    "name": "interface-mtu"
+  },
+  {
+    "code": 27,
+    "name": "all-subnets-local"
+  },
+  {
+    "code": 28,
+    "name": "broadcast-address"
+  },
+  {
+    "code": 29,
+    "name": "perform-mask-discovery"
+  },
+  {
+    "code": 30,
+    "name": "mask-supplier"
+  },
+  {
+    "code": 31,
+    "name": "router-discovery"
+  },
+  {
+    "code": 32,
+    "name": "router-solicitation-address"
+  },
+  {
+    "code": 33,
+    "name": "static-routes"
+  },
+  {
+    "code": 34,
+    "name": "trailer-encapsulation"
+  },
+  {
+    "code": 35,
+    "name": "arp-cache-timeout"
+  },
+  {
+    "code": 36,
+    "name": "ieee802-3-encapsulation"
+  },
+  {
+    "code": 37,
+    "name": "default-tcp-ttl"
+  },
+  {
+    "code": 38,
+    "name": "tcp-keepalive-interval"
+  },
+  {
+    "code": 39,
+    "name": "tcp-keepalive-garbage"
+  },
+  {
+    "code": 40,
+    "name": "nis-domain"
+  },
+  {
+    "code": 41,
+    "name": "nis-servers"
+  },
+  {
+    "code": 42,
+    "name": "ntp-servers"
+  },
+  {
+    "code": 43,
+    "name": "vendor-encapsulated-options"
+  },
+  {
+    "code": 44,
+    "name": "netbios-name-servers"
+  },
+  {
+    "code": 45,
+    "name": "netbios-dd-server"
+  },
+  {
+    "code": 46,
+    "name": "netbios-node-type"
+  },
+  {
+    "code": 47,
+    "name": "netbios-scope"
+  },
+  {
+    "code": 48,
+    "name": "font-servers"
+  },
+  {
+    "code": 49,
+    "name": "x-display-manager"
+  },
+  {
+    "code": 52,
+    "name": "dhcp-option-overload"
+  },
+  {
+    "code": 54,
+    "name": "dhcp-server-identifier"
+  },
+  {
+    "code": 56,
+    "name": "dhcp-message"
+  },
+  {
+    "code": 57,
+    "name": "dhcp-max-message-size"
+  },
+  {
+    "code": 60,
+    "name": "vendor-class-identifier"
+  },
+  {
+    "code": 62,
+    "name": "nwip-domain-name"
+  },
+  {
+    "code": 63,
+    "name": "nwip-suboptions"
+  },
+  {
+    "code": 64,
+    "name": "nisplus-domain-name"
+  },
+  {
+    "code": 65,
+    "name": "nisplus-servers"
+  },
+  {
+    "code": 66,
+    "name": "tftp-server-name"
+  },
+  {
+    "code": 67,
+    "name": "boot-file-name"
+  },
+  {
+    "code": 68,
+    "name": "mobile-ip-home-agent"
+  },
+  {
+    "code": 69,
+    "name": "smtp-server"
+  },
+  {
+    "code": 70,
+    "name": "pop-server"
+  },
+  {
+    "code": 71,
+    "name": "nntp-server"
+  },
+  {
+    "code": 72,
+    "name": "www-server"
+  },
+  {
+    "code": 73,
+    "name": "finger-server"
+  },
+  {
+    "code": 74,
+    "name": "irc-server"
+  },
+  {
+    "code": 75,
+    "name": "streettalk-server"
+  },
+  {
+    "code": 76,
+    "name": "streettalk-directory-assistance-server"
+  },
+  {
+    "code": 77,
+    "name": "user-class"
+  },
+  {
+    "code": 78,
+    "name": "slp-directory-agent"
+  },
+  {
+    "code": 79,
+    "name": "slp-service-scope"
+  },
+  {
+    "code": 85,
+    "name": "nds-servers"
+  },
+  {
+    "code": 86,
+    "name": "nds-tree-name"
+  },
+  {
+    "code": 87,
+    "name": "nds-context"
+  },
+  {
+    "code": 88,
+    "name": "bcms-controller-names"
+  },
+  {
+    "code": 89,
+    "name": "bcms-controller-address"
+  },
+  {
+    "code": 93,
+    "name": "client-system"
+  },
+  {
+    "code": 94,
+    "name": "client-ndi"
+  },
+  {
+    "code": 97,
+    "name": "uuid-guid"
+  },
+  {
+    "code": 98,
+    "name": "uap-servers"
+  },
+  {
+    "code": 99,
+    "name": "geoconf-civic"
+  },
+  {
+    "code": 100,
+    "name": "pcode"
+  },
+  {
+    "code": 101,
+    "name": "tcode"
+  },
+  {
+    "code": 108,
+    "name": "v6-only-preferred"
+  },
+  {
+    "code": 112,
+    "name": "netinfo-server-address"
+  },
+  {
+    "code": 113,
+    "name": "netinfo-server-tag"
+  },
+  {
+    "code": 114,
+    "name": "default-url"
+  },
+  {
+    "code": 116,
+    "name": "auto-config"
+  },
+  {
+    "code": 117,
+    "name": "name-service-search"
+  },
+  {
+    "code": 118,
+    "name": "subnet-selection"
+  },
+  {
+    "code": 119,
+    "name": "domain-search"
+  },
+  {
+    "code": 124,
+    "name": "vivco-suboptions"
+  },
+  {
+    "code": 125,
+    "name": "vivso-suboptions"
+  },
+  {
+    "code": 136,
+    "name": "pana-agent"
+  },
+  {
+    "code": 137,
+    "name": "v4-lost"
+  },
+  {
+    "code": 138,
+    "name": "capwap-ac-v4"
+  },
+  {
+    "code": 141,
+    "name": "sip-ua-cs-domains"
+  },
+  {
+    "code": 146,
+    "name": "rdnss-selection"
+  },
+  {
+    "code": 159,
+    "name": "v4-portparams"
+  },
+  {
+    "code": 160,
+    "name": "v4-captive-portal"
+  },
+  {
+    "code": 212,
+    "name": "option-6rd"
+  },
+  {
+    "code": 213,
+    "name": "v4-access-domain"
+  }
+]

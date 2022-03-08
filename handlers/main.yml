@@ -1,5 +1,6 @@
 ---
 - name: Restart Kea DHCPv4
-  shell: 
-    cmd: keactrl reload 
+  systemd: 
+    name: "{{ kea_service_names.dhcp4 }}"
+    state: restarted
   listen: restart_kea_dhcp4

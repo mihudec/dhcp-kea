@@ -14,4 +14,9 @@ kea_packages:
   
   - name: kea-admin
     state: absent
+
+kea_service_names:
+  dhcp4: isc-kea-dhcp4-server
+  d2: isc-kea-dhcp-ddns-server
+  ca: isc-kea-ctrl-agent
     
