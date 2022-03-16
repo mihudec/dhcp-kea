@@ -1,4 +1,5 @@
 import ipaddress
+from optparse import Option
 import pathlib
 import json
 from functools import lru_cache
@@ -116,6 +117,7 @@ class KeaDhcpOptionDef(KeaDhcpOptionBase):
 class KeaDhcpOption(KeaDhcpOptionBase):
 
     data: str
+    always_send: Optional[bool]
     csv_format: Optional[bool]
 
     @root_validator(allow_reuse=True)
@@ -137,18 +139,26 @@ class KeaDhcpClientClass(BaseKeaModel):
 class KeaClient4Reservation(BaseKeaModel):
 
     client_id: Optional[str]
+    circuit_id: Optional[str]
     hw_address: Optional[str]
     hostname: Optional[str]
     ip_address: Optional[ipaddress.IPv4Address]
     option_data: Optional[List[KeaDhcpOption]]
     option_def: Optional[List[KeaDhcpOptionDef]]
 
+class KeaRelay4(BaseKeaModel):
+
+    ip_addresses: List[ipaddress.IPv4Address]
 
 class KeaPoolCommon(BaseKeaModel):
     
     option_data: Optional[List[KeaDhcpOption]]
     option_def: Optional[List[KeaDhcpOptionDef]]
+    
+    server_hostname: Optional[str]
+
     client_class: Optional[str]
+    require_client_classes: Optional[List[str]]
     user_context: Optional[dict]
 
 
@@ -179,15 +189,18 @@ class KeaPool4(KeaPoolCommon):
 
 class KeaSubnet4(KeaPoolCommon):
 
+    authoritative: Optional[bool]
     subnet: ipaddress.IPv4Network
     pools: Optional[List[KeaPool4]]
     min_valid_lifetime: Optional[NonNegativeInt]
-    valid_lifetime: Optional[NonNegativeInt] = Field(default=3600)
+    valid_lifetime: Optional[NonNegativeInt]
     max_valid_lifetime: Optional[NonNegativeInt]
     
     renew_timer: Optional[NonNegativeInt]
     rebind_timer: Optional[NonNegativeInt]
     
+    relay: Optional[KeaRelay4]
+    interface: Optional[str]
     reservations: Optional[List[KeaClient4Reservation]]
 
 
@@ -204,8 +217,10 @@ class KeaSanityChecks(BaseKeaModel):
     lease_checks: Optional[Literal['none', 'warn', 'fix', 'fix-del', 'del']] = Field(default='fix-del')
 
 
+
 class KeaDhcp4Config(KeaBaseConfigContainer):
 
+    authoritative: Optional[bool]
     interfaces_config: Optional[KeaInterfacesConfig]
     sanity_checks: Optional[KeaSanityChecks]
     lease_database: Optional[KeaLeaseDatabase] = Field(default_factory=KeaLeaseDatabase)
@@ -216,12 +231,13 @@ class KeaDhcp4Config(KeaBaseConfigContainer):
     valid_lifetime: Optional[NonNegativeInt] = Field(default=3600)
     max_valid_lifetime: Optional[NonNegativeInt]
 
-    renew_timer: Optional[NonNegativeInt] # = Field(default=900)
-    rebind_timer: Optional[NonNegativeInt] # = Field(default=1800)
+    renew_timer: Optional[NonNegativeInt]
+    rebind_timer: Optional[NonNegativeInt]
     
     option_data: Optional[List[KeaDhcpOption]]
     option_def: Optional[List[KeaDhcpOptionDef]]
     client_classes: Optional[List[KeaDhcpClientClass]]
+    server_hostname: Optional[str]
     subnet4: Optional[List[KeaSubnet4]]
     loggers: Optional[List[KeaLogger]] = Field(default_factory=KeaLogger.get_default_dhcp4)
 
@@ -251,30 +267,3 @@ class FilterModule(object):
 
     def filters(self):
         return {k: v for k, v in KeaFilters().filters().items()}
-
-
-if __name__ == '__main__':
-
-    # print(KeaConfigFileDhcp4(Dhcp4=KeaDhcp4Config()).json(by_alias=True, indent=2, sort_keys=True, exclude_none=True))
-    data = {
-        'interfaces-config': {
-            'interfaces': [
-                'eth0'
-            ]
-        },
-        'subnet4': [
-            {
-                'subnet': '192.168.1.0/24',
-                'pools': [
-                    {
-                        'pool': '192.168.1.2',
-                        'option-data': [
-                            {"name": 'routers', 'data': '192.168.1.1'}
-                        ]
-                    }
-                ]
-            }
-        ]
-    }
-    f = FilterModule().filters()['get_kea4_config']
-    print(f(data))
