@@ -27,7 +27,7 @@
   block:
     - name: Assert DHCPv4 Candidate Config is Valid
       assert:
-        that: test_kea_dhcp4_config_result.failed is false
+        that: test_kea_dhcp4_config_result.failed is sameas false
     
     - name: Backup DHCPv4 Current Config
       ansible.builtin.copy: 
