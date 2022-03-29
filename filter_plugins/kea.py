@@ -133,6 +133,7 @@ class KeaDhcpClientClass(BaseKeaModel):
     name: str
     test: str
     option_data: Optional[List[KeaDhcpOption]]
+    option_def: Optional[List[KeaDhcpOptionDef]]
 
 
 
