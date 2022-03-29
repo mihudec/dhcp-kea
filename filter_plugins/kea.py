@@ -131,7 +131,7 @@ class KeaDhcpOption(KeaDhcpOptionBase):
 class KeaDhcpClientClass(BaseKeaModel):
 
     name: str
-    test: str
+    test: Optional[str]
     option_data: Optional[List[KeaDhcpOption]]
     option_def: Optional[List[KeaDhcpOptionDef]]
 
