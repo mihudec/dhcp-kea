@@ -116,7 +116,7 @@ class KeaDhcpOptionDef(KeaDhcpOptionBase):
 
 class KeaDhcpOption(KeaDhcpOptionBase):
 
-    data: str
+    data: Optional[str]
     always_send: Optional[bool]
     csv_format: Optional[bool]
 
